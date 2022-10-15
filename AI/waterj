@@ -1,0 +1,32 @@
+xc = int(input("Enter capacity of first jug X:"))
+yc = int(input("Enter capacity of second jug Y"))
+d = int(input("Enter the final goal: "))
+
+print("0   0")
+print(str(xc) + "   0")
+
+x = xc
+y = 0
+step = 1
+while ((x is not d) and (y is not d)):
+        temp = min(x, yc - y)
+        y = y + temp
+        x = x - temp
+
+        step = step + 1
+        if ((x == d) or (y == d)):
+            print(str(x)+"   "+str(y))
+            break
+
+        if x == 0:
+            x = xc
+            print(str(x) + "   " + str(y))
+            step = step + 1
+
+        if y == yc:
+            print(str(x) + "   " + str(y))
+            y = 0
+            print(str(x) + "   " + str(y))
+            step = step + 1
+
+print("end")
