@@ -1,0 +1,102 @@
+inital = [
+    [1,0,3],
+    [4,2,6],
+    [7,5,8]
+]
+final = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,0]
+]
+pos = [0,1]
+def val(b):
+    cost =0
+    for i in range(0,3):
+        for j in range(0,3):
+            if final[i][j]!=b[i][j]:
+                cost = cost+1
+    return cost
+
+def top(i):
+    a1= pos[0]
+    a2 = pos[1]
+    if a1 - 1 < 0:
+        return 999
+    temp = i[a1][a2]
+    i[a1][a2] = i[a1 - 1][a2]
+    i[a1 - 1][a2] = temp
+    return val(i)
+
+def bot(i):
+    a1 = pos[0]
+    a2 = pos[1]
+    temp = i[a1][a2]
+    if a1+1>2:
+        return 999
+    i[a1][a2] = i[a1 + 1][a2]
+    i[a1 + 1][a2] = temp
+    return val(i)
+
+def left(i):
+    a1 = pos[0]
+    a2 = pos[1]
+    if a2 - 1 < 0:
+        return 999
+    temp = i[a1][a2]
+    i[a1][a2] = i[a1][a2-1]
+    i[a1 ][a2-1] = temp
+    return val(i)
+def right(i):
+    a1 = pos[0]
+    a2 = pos[1]
+    if a2 +1 > 2:
+        return 999
+    temp = i[a1][a2]
+    i[a1][a2] = i[a1][a2+1]
+    i[a1][a2+1] = temp
+    return val(i)
+
+def copy(ic):
+    for i in range(0,3):
+        for j in range(0,3):
+            ic[i][j] = inital[i][j]
+
+def st():
+    h=1
+    ic = [
+        [0,0,0],[0,0,0],[0,0,0]
+    ]
+    copy(ic)
+    k1 = top(ic)
+    copy(ic)
+    k2 = bot(ic)
+    copy(ic)
+    k3 = left(ic)
+    copy(ic)
+    k4 = right(ic)
+    k = min(k1,k2,k3,k4)
+    if k==k1:
+        h = top(inital)
+        pos[0] = pos[0]-1
+
+    if k==k2:
+        h = bot(inital)
+        pos[0] = pos[0]+1
+
+    if k==k3:
+        h = left(inital)
+        pos[1] = pos[1]-1
+
+    if k==k4:
+        h = right(inital)
+        pos[1] = pos[0]+1
+    if h > 0:
+        return 1
+    else:
+        return 0
+
+print(inital)
+u = 1
+while u==1:
+    u = st()
+    print(inital)
