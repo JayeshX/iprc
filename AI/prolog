@@ -1,0 +1,18 @@
+max(A,B):-
+( A>B->  
+    ( write(A)  );(   write(B))).
+
+
+Factorial:
+fact(0,1).
+fact(N,Res):-
+    N>0->
+    N1 is N-1,
+    fact(N1,Resu),
+    Res is Resu*N.
+
+count elements:
+fact([],0).
+fact([_|Tail],N):-
+    fact(Tail,N1),
+    N is N1+1.
